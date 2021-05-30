@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+001_initial.py
+002_rate_source.py
+tests.py
+
