@@ -11,5 +11,9 @@ class Rate(models.Model):
 
 class ContactUs(models.Model):
     email_from = models.EmailField()
-    subject = models.CharField(max_length=20)
-    message = models.TextField()
+    subject = models.CharField(max_length=255)
+    message = models.CharField(max_length=255)
+
+class Source(models.Model):
+    name = models.CharField(max_length=255)
+    url = models.URLField(max_length=200)

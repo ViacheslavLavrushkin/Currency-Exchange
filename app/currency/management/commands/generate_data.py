@@ -28,3 +28,4 @@ class Command(BaseCommand):
                subject=fake.name(),
                message=fake.post(size='medium'),
            )
+
