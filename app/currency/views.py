@@ -1,10 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from currency.models import Rate
+from currency.models import Source
 
 from django.http import HttpResponse
-
-from currency.models import Rate
-
-from currency.models import Source
+from django.shortcuts import render, get_object_or_404  # noqa
 
 
 def hello_world(request):
@@ -13,8 +11,6 @@ def hello_world(request):
 
 def rate_list(request):
     queryset = Rate.objects.all()
-    #print(queryset.query)
-
 
     context = {
         'objects': queryset,

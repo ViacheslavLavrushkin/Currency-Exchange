@@ -1,4 +1,4 @@
-from currency.views import hello_world, rate_list, rate_details, rate_source, rate_privatbank
+from currency.views import hello_world, rate_list, rate_details, rate_source, rate_privatbank  # noqa
 
 from django.contrib import admin
 from django.urls import path
