@@ -6,13 +6,15 @@
 </head>
 <body>
 
-Count: {{ count }}
+Instance: {{ form.instance.id }}
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Send</button>
 </form>
+
+<a href="/currency/rate/delete/{{ form.instance.id }}/">Delete</a>
 
 </body>
 </html>

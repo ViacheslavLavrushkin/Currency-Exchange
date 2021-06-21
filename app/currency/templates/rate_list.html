@@ -6,12 +6,14 @@
 </head>
 <body>
 
+<a href="/currency/rate/create/">Create Rate</a>
 
 {% for rate in objects %}
     <p>
         ID: {{ rate.id }}
         Buy: {{rate.buy}}
         Sale: {{rate.sale}}
+        <a href="/currency/rate/update/{{ rate.id }}/">Edit</a>
     </p>
 {% endfor %}
 
