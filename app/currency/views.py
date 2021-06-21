@@ -1,17 +1,15 @@
+from annoying.functions import get_object_or_None
+
+from currency.forms import ContactUsForm
+from currency.forms import RateForm
+from currency.forms import SourceForm
 from currency.models import ContactUs
 from currency.models import Rate
 from currency.models import Source
 
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404  # noqa
-
-from annoying.functions import get_object_or_None
-
-from currency.forms import ContactUsForm
-
-from currency.forms import RateForm
-
-from currency.forms import SourceForm
 
 
 def hello_world(request):

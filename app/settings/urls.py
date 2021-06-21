@@ -1,11 +1,8 @@
 from currency.views import (
-    hello_world,
-    rate_list, rate_details,
-    rate_create, rate_update,
-    rate_delete,
     contactus, contactus_create,
-    source, source_create, source_update, source_privatbank,
-    source_delete,
+    hello_world,
+    rate_create, rate_delete, rate_details, rate_list, rate_update,
+    source, source_create, source_delete, source_privatbank, source_update,
 )  # noqa
 
 from django.contrib import admin
