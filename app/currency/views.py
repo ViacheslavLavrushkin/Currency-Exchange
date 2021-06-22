@@ -112,7 +112,6 @@ def rate_delete(request, pk):
     instance = get_object_or_None(Rate, pk=pk)
     if instance is not None:
         instance.delete()
-    instance.delete()
     return HttpResponseRedirect('/currency/rate/list/')
 
 
@@ -157,7 +156,6 @@ def source_delete(request, pk):
     instance = get_object_or_None(Source, pk=pk)
     if instance is not None:
         instance.delete()
-    instance.delete()
     return HttpResponseRedirect('/currency/source/')
 
 
