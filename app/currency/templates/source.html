@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title table</title>
+</head>
+<body>
+
+<a href="/currency/source/create/">Create Source</a>
+
+{% for source in objects %}
+    <p>
+        ID: {{ source.id }}
+        NAME: {{ source.name }}
+        URL: {{ source.url }}
+        <a href="/currency/source/update/{{ source.id }}/">Edit</a>
+    </p>
+{% endfor %}
+
+
+</body>
+</html>

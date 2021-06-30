@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     'django_extensions',
 
+    'annoying',
+
     'currency',
 ]
 

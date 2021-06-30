@@ -10,7 +10,7 @@ class Rate(models.Model):
 
 
 class ContactUs(models.Model):
-    objects = None
+    object = models.CharField(max_length=120) # noqa
     email_from = models.EmailField()
     subject = models.CharField(max_length=255)
     message = models.CharField(max_length=255)
