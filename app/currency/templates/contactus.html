@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title table</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<a href="/currency/contactus/create/">Create Contact</a>
+{% block main_content %}
 
-{% for contactus in objects %}
-    <p>
-        ID: {{ contactus.id }}
-        OBJECT: {{ contactus.object }}
-        EMAIL: {{ contactus.email_from }}
-        SUBJECT: {{ contactus.subject }}
-        MESSAGE: {{ contactus.message }}
-    </p>
-{% endfor %}
+    <a href="/currency/contactus/create/">Create Contact</a>
 
+    {% for contactus in objects %}
+        <p>
+            ID: {{ contactus.id }}
+            OBJECT: {{ contactus.object }}
+            EMAIL: {{ contactus.email_from }}
+            SUBJECT: {{ contactus.subject }}
+            MESSAGE: {{ contactus.message }}
+        </p>
+    {% endfor %}
 
-</body>
-</html>
+{% endblock main_content %}
