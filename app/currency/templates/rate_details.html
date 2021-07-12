@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title table</title>
-    <link src="...">
-</head>
-<body>
-<p>ID: {{ object.id }}</p>
-<p>Buy: {{ object.buy }}</p>
-<p>Sale: {{ object.sale }}</p>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block main_content %}
+
+    <p>ID: {{ object.id }}</p>
+    <p>Buy: {{ object.buy }}</p>
+    <p>Sale: {{ object.sale }}</p>
+
+{% endblock main_content %}
+

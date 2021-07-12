@@ -1,8 +1,9 @@
-import debug_toolbar
 from currency.views import index
 
+import debug_toolbar
+
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 
 
 urlpatterns = [

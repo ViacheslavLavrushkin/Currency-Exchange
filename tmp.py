@@ -13,3 +13,6 @@
 #
 # d = [1, 1, 1, 3, 2, 2]
 # print(Counter(d).most_common(2))
+
+
+# < a href = "/currency/rate/delete/{{ form.instance.id }}/" > Delete < / a >

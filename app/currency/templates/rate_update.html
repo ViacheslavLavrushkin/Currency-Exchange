@@ -9,7 +9,5 @@
         <button type="submit">Send</button>
     </form>
 
-    <a href="/currency/rate/delete/{{ form.instance.id }}/">Delete</a>
-
-
+    <a href="{% url 'currency:rate-delete' pk=form.instance.id %}">Delete</a>
 {% endblock main_content %}

@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <a href="/currency/rate/create/">Create Rate</a>
+    <a href="{% url 'currency:rate-create' %}">Create Rate</a>
 
-    {% for rate in objects_list %}
+    {% for rate in object_list %}
        <p>
             ID: {{ rate.id }}
             Buy: {{ rate.buy }}

@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title table</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<a href="/currency/source/create/">Create Source</a>
+{% block main_content %}
 
-{% for source in objects %}
-    <p>
-        ID: {{ source.id }}
-        NAME: {{ source.name }}
-        URL: {{ source.url }}
-        <a href="/currency/source/update/{{ source.id }}/">Edit</a>
-    </p>
-{% endfor %}
+<a href="{% url 'currency:source-create' %}">Create Source</a>
+<a href="{% url 'currency:source-privatbank' %}">PrivatBank Info</a>
 
+    {% for source in objects %}
+        <p>
+            ID: {{ source.id }}
+            NAME: {{ source.name }}
+            URL: {{ source.url }}
+            <a href="{% url 'currency:source-update' pk=source.id %}">Edit</a>
+        </p>
+    {% endfor %}
 
-</body>
-</html>
+{% endblock main_content %}
+
