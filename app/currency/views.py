@@ -86,5 +86,9 @@ class SourceDeleteView(DeleteView):
 class CreateContactUs(CreateView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_create.html'
-    success_url = reverse_lazy('currency:index')
+    success_url = reverse_lazy('index')
     form_class = ContactUsForm
+
+    def save(self, commit=True):
+        print('Form Save\n' * 10)
+        return super().save(commit)

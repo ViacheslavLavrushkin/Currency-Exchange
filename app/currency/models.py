@@ -20,3 +20,7 @@ class ContactUs(models.Model):
 class Source(models.Model):
     name = models.CharField(max_length=255)
     url = models.URLField(max_length=200)
+
+    def save(self, *args, **kwargs):
+        print('ContactUs Model save')
+        return super().save(*args, **kwargs)
