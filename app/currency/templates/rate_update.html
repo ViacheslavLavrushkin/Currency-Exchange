@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-Instance: {{ form.instance.id }}
+{% block main_content %}
+    Instance: {{ form.instance.id }}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Send</button>
-</form>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send</button>
+    </form>
 
-<a href="/currency/rate/delete/{{ form.instance.id }}/">Delete</a>
-
-</body>
-</html>
+    <a href="{% url 'currency:rate-delete' pk=form.instance.id %}">Delete</a>
+{% endblock main_content %}

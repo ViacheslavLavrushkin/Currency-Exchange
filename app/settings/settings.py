@@ -42,6 +42,8 @@ INSTALLED_APPS = [
 
     'annoying',
 
+    'debug_toolbar',
+
     'currency',
 ]
 
@@ -53,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -134,3 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     from settings.settings_local import *
 # except ImportError:
 #     print('No local settings were found! \n' )
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

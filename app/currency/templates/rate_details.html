@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title table</title>
-</head>
-<body>
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Buy</th>
-        <th>Sale</th>
-    </tr>
-    <tr>
-        <td>{{ object.id }}</td>
-        <td>{{ object.buy }}</td>
-        <td>{{ object.sale }}</td>
-    </tr>
-</table>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+    <p>ID: {{ object.id }}</p>
+    <p>Buy: {{ object.buy }}</p>
+    <p>Sale: {{ object.sale }}</p>
+
+{% endblock main_content %}
+
