@@ -5,6 +5,7 @@ from currency.models import ContactUs
 from currency.models import Rate
 from currency.models import Source
 
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -89,6 +90,25 @@ class CreateContactUs(CreateView):
     success_url = reverse_lazy('index')
     form_class = ContactUsForm
 
-    def save(self, commit=True):
-        print('Form Save\n' * 10)
-        return super().save(commit)
+    # def save(self, commit=True):
+    #     print('Form Save\n' * 10)
+    #     return super().save(commit)
+
+    def form_valid(self, form):
+        data = form.cleaned_data
+        body = f'''
+        From: {data['email_from']}
+        Topic: {data['subject']}
+        Message:
+        {data['message']}
+        '''
+
+        send_mail(
+            'Contact Us from Client',
+            body,
+            'testofamilo25@gmail.com',
+            ['lavrushkinvv@gmail.com'],
+            fail_silently=False,
+        )
+
+        return super().form_valid(form)
