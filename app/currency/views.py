@@ -5,6 +5,8 @@ from currency.models import ContactUs
 from currency.models import Rate
 from currency.models import Source
 
+from currency.tasks import send_email_in_background
+
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.urls import reverse_lazy
@@ -103,12 +105,9 @@ class CreateContactUs(CreateView):
         {data['message']}
         '''
 
-        send_mail(
-            'Contact Us from Client',
-            body,
-            'testofamilo25@gmail.com',
-            ['lavrushkinvv@gmail.com'],
-            fail_silently=False,
-        )
+        send_email_in_background.delay(body)
+
+        # from .tasks import print_hello_world
+        # print_hello_world.delay()
 
         return super().form_valid(form)
