@@ -23,3 +23,6 @@ createsuperuser:
 worker:
 	cd app; celery -A settings worker -l info
 
+beat:
+	cd app; celery -A settings beat -l info
+

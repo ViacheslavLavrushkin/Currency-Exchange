@@ -8,6 +8,8 @@
             ID: {{ rate.id }}
             Buy: {{ rate.buy }}
             Sale: {{ rate.sale }}
+            Source: {{ rate.source }}
+            Created: {{ rate.created }}
             <a href="{% url 'currency:rate-details' pk=rate.id %}">Details</a>
             <a href="{% url 'currency:rate-update' pk=rate.id %}">Edit</a>
        </p>
