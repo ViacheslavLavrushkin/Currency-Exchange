@@ -17,4 +17,3 @@ def to_decimal(number: str) -> Decimal:
 
     """
     return Decimal(number).quantize(Decimal('0.01'))
-

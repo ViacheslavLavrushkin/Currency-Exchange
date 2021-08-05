@@ -4,10 +4,8 @@ from currency.forms import SourceForm
 from currency.models import ContactUs
 from currency.models import Rate
 from currency.models import Source
-
 from currency.tasks import send_email_in_background
 
-from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView

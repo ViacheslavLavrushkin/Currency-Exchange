@@ -149,14 +149,34 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 CELERY_BROKER_URL = 'amqp://localhost'
 
 CELERY_BEAT_SCHEDULE = {
-    'parse': {
-        'task': 'currency.tasks.parse',
-        'schedule': crontab(minute='*/6'),
+    'parse_privatbank': {
+        'task': 'currency.tasks.parse_privatbank',
+        'schedule': crontab(minute='*/1'),
+    },
+    'parse_monobank': {
+        'task': 'currency.tasks.parse_monobank',
+        'schedule': crontab(minute='*/1'),
+    },
+    'parse_vkurse': {
+        'task': 'currency.tasks.parse_vkurse',
+        'schedule': crontab(minute='*/1'),
+    },
+    'parse_iboxbank': {
+        'task': 'currency.tasks.parse_iboxbank',
+        'schedule': crontab(minute='*/1'),
+    },
+    'parse_alfabank': {
+        'task': 'currency.tasks.parse_alfabank',
+        'schedule': crontab(minute='*/1'),
+    },
+    'parse_oschadbank': {
+        'task': 'currency.tasks.parse_oschadbank',
+        'schedule': crontab(minute='*/1'),
     },
 }
 
 
 try:
-    from settings.settings_local import *
+    from settings.settings_local import *  # noqa
 except ImportError:
-    print('No local settings were found!\n' * 5)
+    print('No local settings were found!\n' * 5)  # noqa
