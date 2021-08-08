@@ -6,6 +6,8 @@ from currency.utils import to_decimal
 
 from django.core.mail import send_mail
 
+from currency import choices
+
 
 import requests
 
@@ -50,12 +52,18 @@ def parse_privatbank():
     currencies = _get_privatbank_currencies()
 
     # available_currencies = frozenset(('USD', 'EUR'))
-    available_currency_types = ('USD', 'EUR')
+    available_currency_types = {
+        'USD':choices.RATE_TYPE_USD,
+        'EUR':choices.RATE_TYPE_EUR,
+    }
+
     source = 'privatbank'
 
     for curr in currencies:
         currency_type = curr['ccy']
         if currency_type in available_currency_types:
+            currency_type = available_currency_types[curr['ccy']]
+
             buy = to_decimal(curr['buy'])
             sale = to_decimal(curr['sale'])
 

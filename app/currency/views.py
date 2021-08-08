@@ -17,6 +17,7 @@ def hello_world(request):
 
 
 def index(request):
+    print('INDEX')
     return render(request, 'index.html')
 
 
