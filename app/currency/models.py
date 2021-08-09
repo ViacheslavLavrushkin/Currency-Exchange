@@ -35,10 +35,11 @@ class Source(models.Model):
 class Analytics(models.Model):
     path = models.CharField(max_length=255)
     counter = models.PositiveBigIntegerField()
-    request_method = models.PositiveSmallIntegerField(
-        choices=choices.REQUEST_METHOD_CHOICES)
+    request_method = models.PositiveSmallIntegerField(choices=choices.REQUEST_METHOD_CHOICES)
+    status_code = models.CharField(max_length=3)
 
     class Meta:
         unique_together = [
-            ['path', 'request_method'],
+            ['path', 'request_method', 'status_code'],
         ]
+
