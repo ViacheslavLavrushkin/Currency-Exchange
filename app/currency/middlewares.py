@@ -1,7 +1,7 @@
-from django.db.models import F
-
 from currency.models import Analytics
 from currency import choices
+
+from django.db.models import F
 
 
 class AnalyticsMiddleware:
@@ -10,19 +10,29 @@ class AnalyticsMiddleware:
 
     def __call__(self, request):
 
-
         '''
         path = '/foo/'
         method = 'GET'
 
         Analytics.objects.filter(method=method, path=path)
-        Analytics.objects.update_or_create(method=method, path=path)
+        Analytics.objects.get_or_create(method=method, path=path)
         '''
-        request_method = choices.REQUEST_METHOD_CHOICES_MAPPER[request.method]
-        Analytics.objects.update_or_create(
-            request_method=request_method, path=request.path,
-            defaults={'counter': F('counter') + 1}
-        )
+
+        response = self.get_response(request)
+        if response:
+
+            request_method = choices.REQUEST_METHOD_CHOICES_MAPPER[request.method]
+
+            obj, created = Analytics.objects.get_or_create(
+                request_method=request_method, path=request.path, defaults={'counter': 1}
+            )
+            if not created:
+                Analytics.objects.filter(pk=obj.pk).update(counter=F('counter') + 1)
+
+        # Analytics.objects.update_or_create(
+        #     request_method=request_method, path=request.path,
+        #     defaults={'counter': F('counter') + 1}
+        # )
         # counter = Analytics.objects.filter(
         #     request_method=request_method, path=request.path).last()
         # if counter:
@@ -31,6 +41,6 @@ class AnalyticsMiddleware:
         # else:
         #     Analytics.objects.create(
         #         request_method=request_method, path=request.path, counter=1)
+        # response = self.get_response(request)
 
-        response = self.get_response(request)
         return response

@@ -92,7 +92,10 @@ def parse_monobank():
     currencies = _get_monobank_currencies()
 
     # available_currencies = frozenset(('USD' -- 840, 'EUR' -- 978))
-    available_currency_types = (840, 978)
+    available_currency_types = {
+        840: choices.RATE_TYPE_USD,
+        978: choices.RATE_TYPE_EUR
+    }
     main_currency_type = (980,)
     source = 'monobank'
 
@@ -103,6 +106,7 @@ def parse_monobank():
                 currency_type in available_currency_types and
                 main_type in main_currency_type
         ):
+            currency_type = available_currency_types[curr['currencyCodeA']]
             buy = to_decimal(curr['rateBuy'])
             sale = to_decimal(curr['rateSell'])
 
@@ -130,11 +134,16 @@ def parse_vkurse():
 
     currencies = _get_vkurse_currencies()
 
-    available_currency_type = ('Dollar', 'Euro')
+    available_currency_type = {
+        'Dollar': choices.RATE_TYPE_USD,
+        'Euro': choices.RATE_TYPE_EUR,
+    }
+
     source = 'vkurse'
 
     for currency_type, val in currencies.items():
         if currency_type in available_currency_type:
+            currency_type = available_currency_type[currency_type]
             buy = to_decimal(val['buy'])
             sale = to_decimal(val['sale'])
 
@@ -163,12 +172,16 @@ def parse_iboxbank():
 
     currencies = _get_iboxbunk_currencies()
 
-    available_currencies_type = ('USD', 'EUR')
+    available_currencies_type = {
+        'USD': choices.RATE_TYPE_USD,
+        'EUR': choices.RATE_TYPE_EUR,
+    }
     source = 'iboxbank'
 
     for curr in currencies:
         currency_type = curr['currency']
         if currency_type in available_currencies_type:
+            currency_type = available_currencies_type[curr['currency']]
             buy = to_decimal(curr['buyValue'])
             sale = to_decimal(curr['saleValue'])
 
@@ -212,12 +225,17 @@ def parse_alfabank():
             'buy': curr.findAll('span')[1].get_text(strip=True),
             'sale': curr.findAll('span')[3].get_text(strip=True),
         })
-    available_currency_type = ('USD', 'EUR')
+    available_currency_type = {
+        'USD': choices.RATE_TYPE_USD,
+        'EUR': choices.RATE_TYPE_EUR,
+    }
+
     source = 'alfabank'
 
     for curr in currencies:
         currency_type = curr['c_type']
         if currency_type in available_currency_type:
+            currency_type = available_currency_type[curr['c_type']]
             buy = to_decimal(curr['buy'])
             sale = to_decimal(curr['sale'])
 
@@ -262,12 +280,17 @@ def parse_oschadbank():
             'sale': curr.findAll('strong')[1].get_text(strip=True),
         })
 
-    available_currency_type = ('USD', 'EUR')
+    available_currency_type = {
+        'USD': choices.RATE_TYPE_USD,
+        'EUR': choices.RATE_TYPE_EUR,
+    }
+
     source = 'oschadbank'
 
     for curr in currencies:
         currency_type = curr['c_type']
         if currency_type in available_currency_type:
+            currency_type = available_currency_type[curr['c_type']]
             buy = to_decimal(curr['buy'])
             sale = to_decimal(curr['sale'])
 
