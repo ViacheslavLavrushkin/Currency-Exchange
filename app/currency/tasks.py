@@ -2,12 +2,10 @@ from bs4 import BeautifulSoup
 
 from celery import shared_task
 
+from currency import choices
 from currency.utils import to_decimal
 
 from django.core.mail import send_mail
-
-from currency import choices
-
 
 import requests
 
@@ -53,8 +51,8 @@ def parse_privatbank():
 
     # available_currencies = frozenset(('USD', 'EUR'))
     available_currency_types = {
-        'USD':choices.RATE_TYPE_USD,
-        'EUR':choices.RATE_TYPE_EUR,
+        'USD': choices.RATE_TYPE_USD,
+        'EUR': choices.RATE_TYPE_EUR,
     }
 
     source = 'privatbank'

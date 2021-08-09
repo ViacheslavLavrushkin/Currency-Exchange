@@ -1,10 +1,11 @@
-from django.db import models
 from currency import choices
+
+from django.db import models
 
 
 class Rate(models.Model):
     # def get_{field_name}_display()
-    type = models.PositiveSmallIntegerField(choices=choices.RATE_TYPE_CHOICES)
+    type = models.PositiveSmallIntegerField(choices=choices.RATE_TYPE_CHOICES)  # noqa
     sale = models.DecimalField(max_digits=5, decimal_places=2)
     buy = models.DecimalField(max_digits=5, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)

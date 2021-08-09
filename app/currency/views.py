@@ -17,7 +17,7 @@ def hello_world(request):
 
 
 def index(request):
-    print('INDEX')
+    print('INDEX')  # noqa
     return render(request, 'index.html')
 
 
