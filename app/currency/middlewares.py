@@ -20,7 +20,6 @@ class AnalyticsMiddleware:
 
         response = self.get_response(request)
 
-
         request_method = choices.REQUEST_METHOD_CHOICES_MAPPER[request.method]
 
         obj, created = Analytics.objects.get_or_create(
