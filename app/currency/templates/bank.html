@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+<a href="{% url 'currency:source-create' %}">Create Bank</a>
+<a href="{% url 'currency:source-privatbank' %}">PrivatBank Info</a>
+
+    {% for bank in objects %}
+        <p>
+            ID: {{ bank.id }}
+            NAME: {{ bank.name }}
+            URL: {{ bank.url }}
+            <a href="{% url 'currency:source-update' pk=bank.id %}">Edit</a>
+        </p>
+    {% endfor %}
+
+{% endblock main_content %}
+
