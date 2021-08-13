@@ -6,6 +6,7 @@
     {% for rate in object_list %}
        <p>
             ID: {{ rate.id }}
+            Type: {{ rate.get_type_display }}
             Buy: {{ rate.buy }}
             Sale: {{ rate.sale }}
             Source: {{ rate.source }}
