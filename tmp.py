@@ -21,25 +21,25 @@
 
 # < a href = "/currency/rate/delete/{{ form.instance.id }}/" > Delete < / a >
 
-def parse_mono():
-    import requests
-    url = 'http://vkurse.dp.ua/course.json'
-    response = requests.get(url)
-    response.raise_for_status()
-    currencies = response.json()
-
-    available_currency_types = (840, 978)
-
-    # uah_number = (980)
-
-    for curr in currencies:
-        currency_type = curr['currencyCodeA']
-        if currency_type in available_currency_types:
-            print(curr)
-
-
-parse_mono()
-
+# def parse_mono():
+#     import requests
+#     url = 'http://vkurse.dp.ua/course.json'
+#     response = requests.get(url)
+#     response.raise_for_status()
+#     currencies = response.json()
+#
+#     available_currency_types = (840, 978)
+#
+#     # uah_number = (980)
+#
+#     for curr in currencies:
+#         currency_type = curr['currencyCodeA']
+#         if currency_type in available_currency_types:
+#             print(curr)
+#
+#
+# parse_mono()
+#
 
 # parse_vkurse()
 
