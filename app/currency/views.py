@@ -33,7 +33,7 @@ def source_privatbank(request):
 
 class RateListView(ListView):
     template_name = 'rate_list.html'
-    queryset = Rate.objects.all()
+    queryset = Rate.objects.all().select_related('bank')
 
 
 class RateDetailView(DetailView):

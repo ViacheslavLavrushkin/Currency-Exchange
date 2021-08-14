@@ -21,18 +21,17 @@ class RateAdmin(ImportExportModelAdmin):
         'buy',
         'sale',
         'type',
-        'source',
+        'bank',
         'created',
     )
     list_filter = (
         ('created', DateTimeRangeFilter),
         'type',
-        'source',
+        'bank',
         'created',
     )
     search_fields = (
         'type',
-        'source',
     )
     readonly_fields = (
         'buy',
