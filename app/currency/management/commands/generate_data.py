@@ -25,7 +25,7 @@ class Command(BaseCommand):
                type=random.choice(('usd', 'eur', 'gpb', 'uah', 'rub')),
                sale=decimal.Decimal(random.randrange(2000, 2999))/100,
                buy=decimal.Decimal(random.randrange(2000, 2999))/100,
-               bank=random.choice(('monobank', 'privatbank', 'vkurse')),
+               source=random.choice(('monobank', 'privatbank', 'vkurse')),
             )
 
             ContactUs.objects.create(

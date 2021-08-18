@@ -32,7 +32,6 @@ class RateAdmin(ImportExportModelAdmin):
     )
     search_fields = (
         'type',
-        'bank',
     )
     readonly_fields = (
         'buy',

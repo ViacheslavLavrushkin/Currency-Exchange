@@ -1,10 +1,8 @@
 from bs4 import BeautifulSoup
 
 from celery import shared_task
-from faker.providers import bank  # !!!
 
-from currency import choices
-from currency import consts
+from currency import choices, consts
 from currency.utils import to_decimal
 
 from django.core.mail import send_mail
@@ -13,30 +11,31 @@ import requests
 
 
 def _get_privatbank_currencies(url):
+    # url = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5'
     response = requests.get(url)
     response.raise_for_status()
     currencies = response.json()
     return currencies
 
 
-def _get_monobank_currencies():
-    url = 'https://api.monobank.ua/bank/currency'
+def _get_monobank_currencies(url):
+    # url = 'https://api.monobank.ua/bank/currency'
     response = requests.get(url)
     response.raise_for_status()
     currencies = response.json()
     return currencies
 
 
-def _get_vkurse_currencies():
-    url = 'http://vkurse.dp.ua/course.json'
+def _get_vkurse_currencies(url):
+    # url = 'http://vkurse.dp.ua/course.json'
     response = requests.get(url)
     response.raise_for_status()
     currencies = response.json()
     return currencies
 
 
-def _get_iboxbunk_currencies():
-    url = 'https://app.iboxbank.online/api/currency/rate-only-base/UAH'
+def _get_iboxbunk_currencies(url):
+    # url = 'https://app.iboxbank.online/api/currency/rate-only-base/UAH'
     response = requests.get(url)
     response.raise_for_status()
     currencies = response.json()
@@ -57,6 +56,8 @@ def parse_privatbank():
         'EUR': choices.RATE_TYPE_EUR,
     }
 
+    # source = 'privatbank'
+
     for curr in currencies:
         currency_type = curr['ccy']
         if currency_type in available_currency_types:
@@ -66,7 +67,8 @@ def parse_privatbank():
             sale = to_decimal(curr['sale'])
 
             previous_rate = Rate.objects.filter(
-                bank=bank, type=currency_type
+                bank=bank,
+                type=currency_type
             ).order_by('created').last()
             # check if new rate should be created
             if (
@@ -79,6 +81,7 @@ def parse_privatbank():
                     type=currency_type,
                     sale=sale,
                     buy=buy,
+                    # source=source,
                     bank=bank,
                 )
             else:
@@ -90,7 +93,7 @@ def parse_monobank():
     from currency.models import Rate, Bank
 
     bank = Bank.objects.get(code_name=consts.CODE_NAME_MONOBANK)
-    currencies = _get_monobank_currencies()
+    currencies = _get_monobank_currencies(bank.url)
 
     # available_currencies = frozenset(('USD' -- 840, 'EUR' -- 978))
     available_currency_types = {
@@ -98,6 +101,7 @@ def parse_monobank():
         978: choices.RATE_TYPE_EUR
     }
     main_currency_type = (980,)
+    # source = 'monobank'
 
     for curr in currencies:
         currency_type = curr['currencyCodeA']
@@ -110,7 +114,10 @@ def parse_monobank():
             buy = to_decimal(curr['rateBuy'])
             sale = to_decimal(curr['rateSell'])
 
-            previous_rate = Rate.objects.filter(bank=bank, type=currency_type).order_by('created').last()
+            previous_rate = Rate.objects.filter(
+                bank=bank,
+                type=currency_type
+            ).order_by('created').last()
             # check if new rate should be created
             if (
                     previous_rate is None or  # rate does not exist, create the first one
@@ -122,6 +129,7 @@ def parse_monobank():
                     type=currency_type,
                     sale=sale,
                     buy=buy,
+                    # source=source,
                     bank=bank,
                 )
             else:
@@ -133,13 +141,14 @@ def parse_vkurse():
     from currency.models import Rate, Bank
 
     bank = Bank.objects.get(code_name=consts.CODE_NAME_VKURSE)
-    currencies = _get_vkurse_currencies()
+    currencies = _get_vkurse_currencies(bank.url)
 
     available_currency_type = {
         'Dollar': choices.RATE_TYPE_USD,
         'Euro': choices.RATE_TYPE_EUR,
     }
 
+    # source = 'vkurse'
 
     for currency_type, val in currencies.items():
         if currency_type in available_currency_type:
@@ -149,7 +158,10 @@ def parse_vkurse():
 
             # in the selection by the cur_type field, a function for reverse conversion of the currency type
             # has been added, in accordance with the Rate model
-            previous_rate = Rate.objects.filter(bank=bank, type=currency_type).order_by('created').last()
+            previous_rate = Rate.objects.filter(
+                bank=bank,
+                type=currency_type
+            ).order_by('created').last()
             # check if new rate should be create
             if (
                     previous_rate is None or  # rate does not exists, create first one
@@ -160,6 +172,7 @@ def parse_vkurse():
                     type=currency_type,
                     sale=sale,
                     buy=buy,
+                    # source=source,
                     bank=bank,
                 )
             else:
@@ -170,13 +183,15 @@ def parse_vkurse():
 def parse_iboxbank():
     from currency.models import Rate, Bank
 
-    bank = Bank.objects.get(code_name=consts.CODE_NAME_IBOX)
-    currencies = _get_iboxbunk_currencies()
+    bank = Bank.objects.get(code_name=consts.CODE_NAME_IBOXBANK)
+    currencies = _get_iboxbunk_currencies(bank.url)
 
     available_currencies_type = {
         'USD': choices.RATE_TYPE_USD,
         'EUR': choices.RATE_TYPE_EUR,
     }
+
+    # source = 'iboxbank'
 
     for curr in currencies:
         currency_type = curr['currency']
@@ -185,7 +200,10 @@ def parse_iboxbank():
             buy = to_decimal(curr['buyValue'])
             sale = to_decimal(curr['saleValue'])
 
-            previous_rate = Rate.objects.filter(bank=bank, type=currency_type).order_by('created').last()
+            previous_rate = Rate.objects.filter(
+                bank=bank,
+                type=currency_type
+            ).order_by('created').last()
             # check if new rate should be created
             if (
                     previous_rate is None or  # rate does not exist, create the first one
@@ -197,6 +215,7 @@ def parse_iboxbank():
                     type=currency_type,
                     sale=sale,
                     buy=buy,
+                    # source=source,
                     bank=bank,
                 )
             else:
@@ -231,6 +250,7 @@ def parse_alfabank():
         'EUR': choices.RATE_TYPE_EUR,
     }
 
+    # source = 'alfabank'
 
     for curr in currencies:
         currency_type = curr['c_type']
@@ -239,7 +259,10 @@ def parse_alfabank():
             buy = to_decimal(curr['buy'])
             sale = to_decimal(curr['sale'])
 
-            previous_rate = Rate.objects.filter(bank=bank, type=currency_type).order_by('created').last()
+            previous_rate = Rate.objects.filter(
+                bank=bank,
+                type=currency_type
+            ).order_by('created').last()
             # check if new rate should be create
             if (
                     previous_rate is None or  # rate does not exists, create first one
@@ -250,6 +273,7 @@ def parse_alfabank():
                     type=currency_type,
                     sale=sale,
                     buy=buy,
+                    # source=source,
                     bank=bank,
                 )
             else:
@@ -260,8 +284,8 @@ def parse_alfabank():
 def parse_oschadbank():
     from currency.models import Rate, Bank
 
-    bank = Bank.objects.get(code_name=consts.CODE_NAME_OSHADBANK)
-    url = 'https://www.oschadbank.ua/ua'
+    bank = Bank.objects.get(code_name=consts.CODE_NAME_OSCHADBANK)
+    url = 'https://www.oschadbank.ua/'
     # parameter to prevent blocking
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit 537.36'
                              '(KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'
@@ -286,6 +310,8 @@ def parse_oschadbank():
         'EUR': choices.RATE_TYPE_EUR,
     }
 
+    # source = 'oschadbank'
+
     for curr in currencies:
         currency_type = curr['c_type']
         if currency_type in available_currency_type:
@@ -293,7 +319,10 @@ def parse_oschadbank():
             buy = to_decimal(curr['buy'])
             sale = to_decimal(curr['sale'])
 
-            previous_rate = Rate.objects.filter(bank=bank, type=currency_type).order_by('created').last()
+            previous_rate = Rate.objects.filter(
+                bank=bank,
+                type=currency_type
+            ).order_by('created').last()
             # check if new rate should be create
             if (
                     previous_rate is None or  # rate does not exists, create first one
@@ -304,6 +333,7 @@ def parse_oschadbank():
                     type=currency_type,
                     sale=sale,
                     buy=buy,
+                    # source=source,
                     bank=bank,
                 )
             else:

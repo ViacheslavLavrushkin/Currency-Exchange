@@ -62,27 +62,27 @@ class RateDeleteView(DeleteView):
 
 
 class SourceListView(ListView):
-    template_name = 'bank.html'
+    template_name = 'source.html'
     queryset = Bank.objects.all()
 
 
 class SourceCreateView(CreateView):
     queryset = Bank.objects.all()
     template_name = 'source_create.html'
-    success_url = reverse_lazy('currency:bank')
+    success_url = reverse_lazy('currency:source')
     form_class = SourceForm
 
 
 class SourceUpdateView(UpdateView):
     queryset = Bank.objects.all()
     template_name = 'source_update.html'
-    success_url = reverse_lazy('currency:bank')
+    success_url = reverse_lazy('currency:source')
     form_class = SourceForm
 
 
 class SourceDeleteView(DeleteView):
     queryset = Bank.objects.all()
-    success_url = reverse_lazy('currency:bank')
+    success_url = reverse_lazy('currency:source')
 
 
 class CreateContactUs(CreateView):
