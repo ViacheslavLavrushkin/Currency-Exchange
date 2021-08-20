@@ -1,6 +1,6 @@
+from currency.models import Bank
 from currency.models import ContactUs
 from currency.models import Rate
-from currency.models import Source
 
 from django import forms
 
@@ -13,13 +13,13 @@ class RateForm(forms.ModelForm):
             'sale',
             'buy',
             'sale',
-            'source',
+            'bank',
         )
 
 
 class SourceForm(forms.ModelForm):
     class Meta:
-        model = Source
+        model = Bank
         fields = (
             'name',
             'url',

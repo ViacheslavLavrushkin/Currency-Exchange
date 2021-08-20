@@ -5,11 +5,11 @@
 <a href="{% url 'currency:source-create' %}">Create Source</a>
 <a href="{% url 'currency:source-privatbank' %}">PrivatBank Info</a>
 
-    {% for source in objects %}
+    {% for bank in objects %}
         <p>
-            ID: {{ source.id }}
-            NAME: {{ source.name }}
-            URL: {{ source.url }}
+            ID: {{ bank.id }}
+            NAME: {{ bank.name }}
+            URL: {{ bank.url }}
             <a href="{% url 'currency:source-update' pk=source.id %}">Edit</a>
         </p>
     {% endfor %}

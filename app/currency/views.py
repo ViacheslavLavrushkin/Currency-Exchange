@@ -1,9 +1,9 @@
 from currency.forms import ContactUsForm
 from currency.forms import RateForm
 from currency.forms import SourceForm
+from currency.models import Bank
 from currency.models import ContactUs
 from currency.models import Rate
-from currency.models import Source
 from currency.tasks import send_email_in_background
 
 from django.http import HttpResponse
@@ -33,7 +33,7 @@ def source_privatbank(request):
 
 class RateListView(ListView):
     template_name = 'rate_list.html'
-    queryset = Rate.objects.all()
+    queryset = Rate.objects.all().select_related('bank')
 
 
 class RateDetailView(DetailView):
@@ -63,25 +63,25 @@ class RateDeleteView(DeleteView):
 
 class SourceListView(ListView):
     template_name = 'source.html'
-    queryset = Source.objects.all()
+    queryset = Bank.objects.all()
 
 
 class SourceCreateView(CreateView):
-    queryset = Source.objects.all()
+    queryset = Bank.objects.all()
     template_name = 'source_create.html'
     success_url = reverse_lazy('currency:source')
     form_class = SourceForm
 
 
 class SourceUpdateView(UpdateView):
-    queryset = Source.objects.all()
+    queryset = Bank.objects.all()
     template_name = 'source_update.html'
     success_url = reverse_lazy('currency:source')
     form_class = SourceForm
 
 
 class SourceDeleteView(DeleteView):
-    queryset = Source.objects.all()
+    queryset = Bank.objects.all()
     success_url = reverse_lazy('currency:source')
 
 
