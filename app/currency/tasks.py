@@ -11,7 +11,7 @@ import requests
 
 
 def _get_privatbank_currencies(url):
-    # url = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5'
+    url = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5'
     response = requests.get(url)
     response.raise_for_status()
     currencies = response.json()
@@ -19,7 +19,7 @@ def _get_privatbank_currencies(url):
 
 
 def _get_monobank_currencies(url):
-    # url = 'https://api.monobank.ua/bank/currency'
+    url = 'https://api.monobank.ua/bank/currency'
     response = requests.get(url)
     response.raise_for_status()
     currencies = response.json()
@@ -27,7 +27,7 @@ def _get_monobank_currencies(url):
 
 
 def _get_vkurse_currencies(url):
-    # url = 'http://vkurse.dp.ua/course.json'
+    url = 'http://vkurse.dp.ua/course.json'
     response = requests.get(url)
     response.raise_for_status()
     currencies = response.json()
@@ -35,7 +35,7 @@ def _get_vkurse_currencies(url):
 
 
 def _get_iboxbunk_currencies(url):
-    # url = 'https://app.iboxbank.online/api/currency/rate-only-base/UAH'
+    url = 'https://app.iboxbank.online/api/currency/rate-only-base/UAH'
     response = requests.get(url)
     response.raise_for_status()
     currencies = response.json()

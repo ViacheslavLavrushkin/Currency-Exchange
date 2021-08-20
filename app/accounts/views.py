@@ -14,3 +14,8 @@ class MyProfile(LoginRequiredMixin, UpdateView):
         'first_name',
         'last_name',
     )
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(pk=self.request.user.pk)
+        return queryset

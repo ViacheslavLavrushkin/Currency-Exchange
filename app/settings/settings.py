@@ -38,9 +38,8 @@ INSTALLED_APPS = [
     'import_export',
 
     'currency',
+
     'accounts',
-
-
 ]
 
 MIDDLEWARE = [
