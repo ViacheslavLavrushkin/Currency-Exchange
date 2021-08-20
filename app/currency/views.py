@@ -1,9 +1,9 @@
 from currency.forms import ContactUsForm
 from currency.forms import RateForm
 from currency.forms import SourceForm
+from currency.models import Bank
 from currency.models import ContactUs
 from currency.models import Rate
-from currency.models import Bank
 from currency.tasks import send_email_in_background
 
 from django.http import HttpResponse

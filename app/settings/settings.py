@@ -2,6 +2,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from celery.schedules import crontab
+
 from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -182,5 +183,3 @@ try:
     from settings.settings_local import *  # noqa
 except ImportError:
     print('No local settings were found!\n' * 5)  # noqa
-
-

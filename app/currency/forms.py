@@ -1,6 +1,6 @@
+from currency.models import Bank
 from currency.models import ContactUs
 from currency.models import Rate
-from currency.models import Bank
 
 from django import forms
 
