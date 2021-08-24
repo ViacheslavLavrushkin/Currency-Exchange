@@ -6,6 +6,7 @@ from currency.models import ContactUs
 from currency.models import Rate
 from currency.tasks import send_email_in_background
 
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -36,10 +37,13 @@ class RateListView(ListView):
     queryset = Rate.objects.all().select_related('bank')
 
 
-class RateDetailView(DetailView):
+class RateDetailView(UserPassesTestMixin, DetailView):
     template_name = 'rate_details.html'
     queryset = Rate.objects.all()
     form_class = RateForm
+
+    def test_func(self):
+        return self.request.user.is_authenticated
 
 
 class RateCreateView(CreateView):
@@ -49,16 +53,22 @@ class RateCreateView(CreateView):
     form_class = RateForm
 
 
-class RateUpdateView(UpdateView):
+class RateUpdateView(UserPassesTestMixin, UpdateView):
     queryset = Rate.objects.all()
     template_name = 'rate_update.html'
     success_url = reverse_lazy('currency:rate-list')
     form_class = RateForm
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class RateDeleteView(DeleteView):
+
+class RateDeleteView(UserPassesTestMixin, DeleteView):
     queryset = Rate.objects.all()
     success_url = reverse_lazy('currency:rate-list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class SourceListView(ListView):
