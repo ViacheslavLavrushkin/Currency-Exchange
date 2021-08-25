@@ -2,15 +2,17 @@
 
 {% block main_content %}
 
-<a href="{% url 'currency:source-create' %}">Create Source</a>
-<a href="{% url 'currency:source-privatbank' %}">PrivatBank Info</a>
+<button onclick="location.href='{% url 'currency:source-create' %}';">Create Source</button>
+<button onclick="location.href='{% url 'currency:source-privatbank' %}';">PrivatBank Info</button>
 
     {% for bank in objects %}
         <p>
             ID: {{ bank.id }}
             NAME: {{ bank.name }}
             URL: {{ bank.url }}
-            <a href="{% url 'currency:source-update' pk=source.id %}">Edit</a>
+            {% if request.user.is_superuser %}
+                <a href="{% url 'currency:source-update' pk=source.id %}">Edit</a>
+            {% endif %}
         </p>
     {% endfor %}
 

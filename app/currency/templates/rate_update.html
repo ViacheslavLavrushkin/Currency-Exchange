@@ -9,5 +9,6 @@
         <button type="submit">Send</button>
     </form>
 
-    <a href="{% url 'currency:rate-delete' pk=form.instance.id %}">Delete</a>
+    <button onclick="location.href='{% url 'currency:rate-delete' pk=form.instance.id %}';">Delete</button>
+
 {% endblock main_content %}

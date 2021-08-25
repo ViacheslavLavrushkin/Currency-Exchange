@@ -2,7 +2,7 @@
 
 {% block main_content %}
 
-    <a href="{% url 'currency:contactus-create' %}">Create Contact</a>
+    <button onclick="location.href='{% url 'currency:contactus-create' %}';">Create Contact</button>
 
     {% for contactus in objects %}
         <p>
