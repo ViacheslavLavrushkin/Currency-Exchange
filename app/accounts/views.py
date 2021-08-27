@@ -1,7 +1,7 @@
 from accounts.models import User
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import PasswordResetForm
+from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
@@ -24,7 +24,7 @@ class MyProfile(LoginRequiredMixin, UpdateView):
         return self.request.user
 
 
-class PasswordReset(PasswordResetForm, UpdateView):
+class PasswordReset(PasswordResetView, UpdateView):
     queryset = User.objects.all()
     template_name = 'password_reset.html'
     success_url = reverse_lazy('index')
