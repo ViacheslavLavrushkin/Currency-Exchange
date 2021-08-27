@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <a href="{% url 'currency:contactus-create' %}">Contact Us</a>
-    <a href="{% url 'currency:rate-list' %}">Rate List</a>
-    <a href="{% url 'currency:source' %}">Source</a>
+    <button onclick="location.href='{% url 'currency:contactus-create' %}';">Contact Us</button>
+    <button onclick="location.href='{% url 'currency:rate-list' %}';">Rate List</button>
+    <button onclick="location.href='{% url 'currency:source' %}';">Source</button>
 {% endblock main_content %}

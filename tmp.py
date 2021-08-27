@@ -83,3 +83,13 @@
     #             currency_type=rate['currency_type'],
     #             type=rate['type'],
     #         )
+
+#  navbar.html lesson16
+
+# {% if request.user.is_authenticated %}
+#     <a href="{% url 'logout' %}">Logout</a>
+#     <a href="{% url 'account:my-profile' %}">My Profile</a>
+# {% else %}
+#     <a href="{% url 'login' %}">Login</a>
+#     <a href="#">SignUp</a>
+# {% endif %}

@@ -11,7 +11,7 @@ from django.db import models
 class Bank(models.Model):
     name = models.CharField(max_length=255)
     code_name = models.CharField(
-        max_length=255,
+        max_length=64,
         unique=True,
         # null=True,
         # default=None,
