@@ -179,6 +179,8 @@ AUTH_USER_MODEL = 'accounts.User'
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 
+DOMAIN = 'http://0.0.0.0:8000/'  # TODO
+
 try:
     from settings.settings_local import *  # noqa
 except ImportError:
