@@ -1,5 +1,6 @@
 from accounts.forms import SignUpForm
 from accounts.models import User
+from accounts.tokens import account_activation_token
 
 from annoying.functions import get_object_or_None
 
@@ -61,10 +62,11 @@ class ActivateAccount(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         activation_key = kwargs.pop('activation_key')
+        activation_token = kwargs.pop('token')
         user = get_object_or_None(
             User.objects.only('is_active'), username=activation_key)
 
-        if user:
+        if user and account_activation_token.check_token(user, activation_token):
             if user.is_active:
                 messages.warning(
                     self.request, 'Your account is already activated.')
