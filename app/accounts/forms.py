@@ -46,7 +46,7 @@ class SignUpForm(forms.ModelForm):
 
         body = f"""
         Activate Your Account
-        {settings.DOMAIN}{reverse('account:activate-account', args=(instance.username, ))}
+        {settings.DOMAIN}{reverse('account:activate-account', args=(instance.username, token_key, ))}
         """
         send_registration_email.delay(body, instance.email)
         return instance

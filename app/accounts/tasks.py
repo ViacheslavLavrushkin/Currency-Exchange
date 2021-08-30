@@ -17,7 +17,7 @@ def send_registration_email(body, email_to):
     send_mail(
         title,
         body,
-        settings.settings_local.DEFAULT_FROM_EMAIL,
+        settings.DEFAULT_FROM_EMAIL,
         [email_to],
         fail_silently=False,
     )
