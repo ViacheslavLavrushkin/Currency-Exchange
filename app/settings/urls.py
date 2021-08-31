@@ -1,4 +1,3 @@
-from accounts import views
 from currency.views import index
 
 import debug_toolbar
