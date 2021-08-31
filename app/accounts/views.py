@@ -61,7 +61,7 @@ class ActivateAccount(RedirectView):
     """
 
     def get_redirect_url(self, *args, **kwargs):
-        activation_key = kwargs.pop('username')
+        activation_key = kwargs.pop('activation_key')
         activation_token = kwargs.pop('token')
         user = get_object_or_None(
             User.objects.only('is_active'), username=activation_key)
