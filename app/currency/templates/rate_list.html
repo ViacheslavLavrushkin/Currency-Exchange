@@ -3,20 +3,38 @@
 {% block main_content %}
 <button onclick="location.href='{% url 'currency:rate-create' %}';">Create Rate</button>
 
-    {% for rate in object_list %}
-       <p>
-            ID: {{ rate.id }}
-            Type: {{ rate.get_type_display }}
-            Buy: {{ rate.buy }}
-            Sale: {{ rate.sale }}
-            Source: {{ rate.bank.name }}
-            Created: {{ rate.created }}
-            {% if request.user.is_authenticated %}
-                <a href="{% url 'currency:rate-details' pk=rate.id %}">Details</a>
-            {% endif %}
-            {% if request.user.is_superuser %}
-                <a href="{% url 'currency:rate-update' pk=rate.id %}">Edit</a>
-            {% endif %}
-       </p>
-    {% endfor %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Type</th>
+                <th scope="col">Buy</th>
+                <th scope="col">Sale</th>
+                <th scope="col">Source</th>
+                <th scope="col">Created</th>
+                <th scope="col">Details</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rate in object_list %}
+             <tr>
+                 <th scope="row">{{ forloop.counter }}</th>
+                 <td>{{ rate.id }}</td>
+                 <td>{{ rate.get_type_display | upper }}</td>
+                 <td>{{ rate.buy }}</td>
+                 <td>{{ rate.sale }}</td>
+                 <td>{{ rate.bank.name }}</td>
+                 <td>{{ rate.created }}</td>
+                 {% if request.user.is_authenticated %}
+                 <td><a href="{% url 'currency:rate-details' pk=rate.id %}">Details</a></td>
+                 {% endif %}
+                 {% if request.user.is_superuser %}
+                 <td>{{ rate.id }}</td>
+                 {% endif %}
+             </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock main_content %}

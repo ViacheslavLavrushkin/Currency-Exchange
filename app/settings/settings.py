@@ -38,9 +38,12 @@ INSTALLED_APPS = [
 
     'import_export',
 
+    'active_link',
+
     'currency',
 
     'accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -121,6 +124,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / '..' / 'static_content'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -180,6 +186,10 @@ AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 
 DOMAIN = 'http://0.0.0.0:8000/'  # TODO
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'currency' / 'static'
+# ]
 
 try:
     from settings.settings_local import *  # noqa

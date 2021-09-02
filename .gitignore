@@ -131,3 +131,4 @@ dmypy.json
 .idea/
 
 app/settings/settings_local.dev.py
+app/settings/settings_local.py
