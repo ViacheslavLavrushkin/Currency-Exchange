@@ -2,19 +2,38 @@
 
 {% block main_content %}
 
-<button onclick="location.href='{% url 'currency:source-create' %}';">Create Source</button>
-<button onclick="location.href='{% url 'currency:source-privatbank' %}';">PrivatBank Info</button>
+    <img src="{{ bank.get_bank_logo_url }}"
+         class="rounded mx-auto d-block rounded-circle" width="160" align="left" alt="Cinque Terre"/>
 
-    {% for bank in objects %}
-        <p>
-            ID: {{ bank.id }}
-            NAME: {{ bank.name }}
-            URL: {{ bank.url }}
-            {% if request.user.is_superuser %}
-                <a href="{% url 'currency:source-update' pk=source.id %}">Edit</a>
-            {% endif %}
-        </p>
-    {% endfor %}
+    <button onclick="location.href='{% url 'currency:source-create' %}';">Create Source</button>
+    <button onclick="location.href='{% url 'currency:source-privatbank' %}';">PrivatBank Info</button>
 
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">URL</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>>
+        <tbody>
+        {% for bank in objects %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ bank.id }}</td>>
+                <td>{{ bank.name }}</td>>
+                <td>{{ bank.url }}</td>>
+                {% if request.user.is_superuser %}
+                <td><a href="{% url 'currency:source-update' pk=bank.id %}">Edit</a></td>
+                {% endif %}
+                {% if request.user.is_superuser %}
+                <td>{{ bank.id }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock main_content %}
 

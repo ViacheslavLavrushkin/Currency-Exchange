@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     'active_link',
 
+    'crispy_forms',
+    "crispy_bootstrap5",
+
     'currency',
 
     'accounts',
@@ -129,6 +132,9 @@ MEDIA_ROOT = BASE_DIR / '..' / 'static_content'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

@@ -1,6 +1,7 @@
 from currency import choices
 
 from django.db import models
+from django.templatetags.static import static
 
 
 # class Source(models.Model):
@@ -8,16 +9,27 @@ from django.db import models
 #     url = models.URLField(max_length=200)
 
 
+def bank_directory_path(instance, filename):
+    return 'uploads/bank_logo/{0}/{1}'.format(instance.id, filename)
+
+
 class Bank(models.Model):
-    name = models.CharField(max_length=255)
+    bank_logo = models.FileField(
+        null=True, blank=True, default=None, upload_to=bank_directory_path)
+    name = models.CharField(max_length=64)
     code_name = models.CharField(
         max_length=64,
         unique=True,
-        # null=True,
-        # default=None,
+        null=True,
+        default=None,
     )
     url = models.URLField(max_length=200)
     original_url = models.URLField()
+
+    def get_bank_logo_url(self):
+        if self.bank_logo:
+            return self.bank_logo.url
+        return static('img/default-bank-logo.png')
 
 
 class Rate(models.Model):

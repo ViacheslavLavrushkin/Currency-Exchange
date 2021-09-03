@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block main_content %}
+
+    <img src="{{ bank.get_bank_logo_url }}"
+         class="rounded mx-auto d-block rounded-circle" width="160" align="left" alt="Cinque Terre"/>
 
     Instance: {{ form.instance.id }}
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form | crispy }}
         <button type="submit">Send</button>
     </form>
 
