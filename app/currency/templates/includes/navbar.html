@@ -1,10 +1,8 @@
-
-
 {% if request.user.is_authenticated %}
     <button style="position: absolute; right: 0;" onclick="location.href='{% url 'logout' %}';">LogOut</button>
-    <button onclick="location.href='{% url 'account:my-profile' %}';">My Profile</button>
+    <button onclick="location.href='{% url 'accounts:my-profile' %}';">My Profile</button>
 {% else %}
     <button style="position: absolute; right: 0;" onclick="location.href='{% url 'login' %}';">LogIn</button>
     <button onclick="location.href='{% url 'password_reset' %}';">Reset Password</button>
-    <button onclick="location.href='#';">Sing Up</button>
+    <button onclick="location.href='{% url 'accounts:signup' %}';">Sing Up</button>
 {% endif %}

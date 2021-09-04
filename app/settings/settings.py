@@ -135,7 +135,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CELERY_BROKER_URL = 'amqp://localhost'
 
@@ -178,6 +178,8 @@ SHELL_PLUS_IMPORTS = [
 AUTH_USER_MODEL = 'accounts.User'
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
+
+DOMAIN = 'http://0.0.0.0:8000/'  # TODO
 
 try:
     from settings.settings_local import *  # noqa
