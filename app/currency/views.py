@@ -81,7 +81,7 @@ class SourceCreateView(CreateView):
     template_name = 'source_create.html'
     success_url = reverse_lazy('currency:source')
     form_class = SourceForm
-255
+
 
 class SourceUpdateView(UpdateView):
     queryset = Bank.objects.all()
