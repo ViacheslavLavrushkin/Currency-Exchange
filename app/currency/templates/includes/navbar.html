@@ -1,8 +1,28 @@
-{% if request.user.is_authenticated %}
-    <button style="position: absolute; right: 0;" onclick="location.href='{% url 'logout' %}';">LogOut</button>
-    <button onclick="location.href='{% url 'accounts:my-profile' %}';">My Profile</button>
-{% else %}
-    <button style="position: absolute; right: 0;" onclick="location.href='{% url 'login' %}';">LogIn</button>
-    <button onclick="location.href='{% url 'password_reset' %}';">Reset Password</button>
-    <button onclick="location.href='{% url 'accounts:signup' %}';">Sing Up</button>
-{% endif %}
+{% load active_link_tags %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link {% active_link 'index' %}" href="{% url 'index' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% active_link 'currency:rate-list' %}" href="{% url 'currency:rate-list' %}">Rate List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% active_link 'currency:contactus-create' %}" href="{% url 'currency:contactus-create' %}">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% active_link 'currency:source' %}" href="{% url 'currency:source' %}">Source</a>
+        </li>
+      </ul>
+      {% if request.user.is_authenticated %}
+          <span class="navbar-text"><button style="position: absolute; right: 0;" onclick="location.href='{% url 'logout' %}';">LogOut</button> <button onclick="location.href='{% url 'accounts:my-profile' %}';">My Profile</button></span>
+      {% else %}
+          <span class="navbar-text"><button style="position: absolute; right: 0;" onclick="location.href='{% url 'login' %}';">LogIn</button> <button onclick="location.href='{% url 'accounts:signup' %}';">Sing Up</button></span>
+          <button onclick="location.href='{% url 'password_reset' %}';">Reset Password</button>
+      {% endif %}
+    </div>
+  </div>
+</nav>

@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block main_content %}
+
+    <img src="{{ request.user.get_avatar_url }}"
+         class="rounded mx-auto d-block rounded-circle" width="160" align="left" alt="Cinque Terre"/>
+
     Update My Profile
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form | crispy }}
         <button type="submit">Save</button>
     </form>
 {% endblock main_content %}

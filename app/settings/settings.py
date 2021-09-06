@@ -38,9 +38,15 @@ INSTALLED_APPS = [
 
     'import_export',
 
+    'active_link',
+
+    'crispy_forms',
+    "crispy_bootstrap5",
+
     'currency',
 
     'accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -121,8 +127,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / '..' / 'static_content'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -180,6 +192,10 @@ AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 
 DOMAIN = 'http://0.0.0.0:8000/'  # TODO
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'currency' / 'static'
+# ]
 
 try:
     from settings.settings_local import *  # noqa

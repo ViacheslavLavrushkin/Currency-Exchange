@@ -22,7 +22,10 @@ class SourceForm(forms.ModelForm):
         model = Bank
         fields = (
             'name',
+            'code_name',
             'url',
+            'original_url',
+            'bank_logo'
         )
 
 
