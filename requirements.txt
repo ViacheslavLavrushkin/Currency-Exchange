@@ -27,6 +27,7 @@ django-import-export==2.5.0
 django-storages==1.11.1
 django-tinymce==3.3.0
 django-utils-six==2.0
+djangorestframework==3.12.4
 ecdsa==0.13.3
 et-xmlfile==1.1.0
 Faker==8.6.0

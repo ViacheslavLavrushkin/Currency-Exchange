@@ -26,6 +26,7 @@ class Bank(models.Model):
     url = models.URLField(max_length=200)
     original_url = models.URLField()
 
+    @property
     def get_bank_logo_url(self):
         if self.bank_logo:
             return self.bank_logo.url

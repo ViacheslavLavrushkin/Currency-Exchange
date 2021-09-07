@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     'active_link',
 
+    'rest_framework',
+
     'crispy_forms',
     "crispy_bootstrap5",
 
