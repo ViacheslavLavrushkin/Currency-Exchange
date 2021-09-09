@@ -16,7 +16,7 @@ urlpatterns = [
     # path('rates/', RateList.as_view()),
     # path('rates/<int:pk>', RateDetails.as_view()),
 
-    path('api/', include('api.urls')),
+    path('api/v1/', include('api.v1.urls')),
     path('', index, name='index'),
     path('auth/', include('django.contrib.auth.urls')),
     path('currency/', include('currency.urls')),

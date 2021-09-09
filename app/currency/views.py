@@ -1,5 +1,3 @@
-from django.views import View
-
 from currency.forms import ContactUsForm
 from currency.forms import RateForm
 from currency.forms import SourceForm
@@ -9,7 +7,7 @@ from currency.models import Rate
 from currency.tasks import send_email_in_background
 
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from django.shortcuts import render, get_object_or_404, reverse, redirect  # noqa
@@ -138,5 +136,3 @@ class CreateContactUs(CreateView):
 #         import json
 #         return JsonResponse(results, safe=False)
         # return HttpResponse(json.dumps(results), content_type='application/json')
-
-
