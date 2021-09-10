@@ -12,3 +12,14 @@ class RateFilter(filters.FilterSet):
             'type': ('in',),
             'created': ('date', 'lte', 'gte',),
         }
+
+
+class ContactUsFilter(filters.FilterSet):
+    class Meta:
+        model = ContactUs
+        fields = {
+            'email_from': ('icontains', 'istartswith', 'iendswith', 'exact'),
+            'subject': ('icontains', 'istartswith', 'iendswith', 'exact'),
+            'message': ('icontains', 'istartswith', 'iendswith', 'exact'),
+            'created': ('date', 'lte', 'gte'),
+        }

@@ -95,7 +95,12 @@ class SourceDeleteView(DeleteView):
     success_url = reverse_lazy('currency:source')
 
 
-class CreateContactUs(CreateView):
+class ContactUsListView(ListView):
+    queryset = ContactUs.objects.all()
+    template_name = 'contactus.html'
+
+
+class ContactUsCreate(CreateView):
     queryset = ContactUs.objects.all()
     template_name = 'contactus_create.html'
     success_url = reverse_lazy('index')
@@ -122,6 +127,22 @@ class CreateContactUs(CreateView):
         return super().form_valid(form)
 
 
+class ContactUsUpdateView(UpdateView):
+    queryset = ContactUs.objects.all()
+    form_class = ContactUsForm
+    template_name = 'contactus_update.html'
+    success_url = reverse_lazy('index')
+
+
+class ContactUsDetailView(DetailView):
+    queryset = ContactUs.objects.all()
+    template_name = 'contactus_details.html'
+
+
+class ContactUsDeleteView(DeleteView):
+    queryset = ContactUs.objects.all()
+    success_url = reverse_lazy('index')
+
 # class RateListApi(View):
 #     def get(self, request):
 #         rates = Rate.objects.all()
@@ -135,4 +156,4 @@ class CreateContactUs(CreateView):
 #             })
 #         import json
 #         return JsonResponse(results, safe=False)
-        # return HttpResponse(json.dumps(results), content_type='application/json')
+#          return HttpResponse(json.dumps(results), content_type='application/json')

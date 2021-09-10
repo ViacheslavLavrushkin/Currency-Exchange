@@ -2,16 +2,39 @@
 
 {% block main_content %}
 
-    <a class="btn btn-primary" href="{% url 'currency:contactus-create' %}" role="button">Create Contact</a>
+<button onclick="location.href='{% url 'currency:contactus-create' %}';">Create Contact</button>
 
-    {% for contactus in objects %}
-        <p>
-            ID: {{ contactus.id }}
-            OBJECT: {{ contactus.object }}
-            EMAIL: {{ contactus.email_from }}
-            SUBJECT: {{ contactus.subject }}
-            MESSAGE: {{ contactus.message }}
-        </p>
-    {% endfor %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">OBJECT</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">SUBJECT</th>
+                <th scope="col">MESSAGE</th>
+                <th scope="col">CREATED</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contactus in objects %}
+         <tr>
+                 <th scope="row">{{ forloop.counter }}</th>
+                 <td>{{ contactus.id }}</td>
+                 <td>{{ contactus.object }}</td>
+                 <td>{{ contactus.email_from }}</td>
+                 <td>{{ contactus.subject }}</td>
+                 <td>{{ contactus.message }}</td>
+                 <td>{{ contactus.created }}</td>
+                 {% if request.user.is_authenticated %}
+                 <td><a href="{% url 'currency:contactus-details' pk=contactus.id %}">Details</a></td>
+                 {% endif %}
+                 {% if request.user.is_superuser %}
+                 <td>{{ contactus.id }}</td>
+                 {% endif %}
+             </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock main_content %}
