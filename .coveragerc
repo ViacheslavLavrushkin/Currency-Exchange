@@ -1,0 +1,24 @@
+
+# .coveragerc to control coverage.py
+[run]
+branch = True
+omit = */tests/*
+       */migrations/*
+       */migrations_old/*
+       */management/*
+       */asgi.py
+       */views_old.py
+       */wsgi.py
+       */manage.py
+       */settings*.py
+
+[report]
+precision = 4
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    def __str__
+
+
+[html]
+directory = .pytest_cache/coverage
