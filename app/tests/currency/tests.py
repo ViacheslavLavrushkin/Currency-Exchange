@@ -83,8 +83,8 @@ def test_create_contact_us(client, mailoutbox, settings, fake):
     assert response.url == '/'
     assert len([mailoutbox]) == 1
     mail = mailoutbox[0]
-    # assert mail.to == [settings.DEFAULT_FROM_EMAIL]
+    assert mail.to == [settings.DEFAULT_FROM_EMAIL]
     assert mail.cc == []
     assert mail.bcc == []
     assert mail.reply_to == []
-    # assert mail.from_email == settings.EMAIL_HOST_USER
+    assert mail.from_email == settings.EMAIL_HOST_USER
