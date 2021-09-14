@@ -30,7 +30,7 @@ def client_api_auth(django_user_model):
 
     email = "drftestauthuser@example.com"
     password = "password"
-    user = django_user_model(email=email)
+    user = django_user_model.objects.create(email=email, password=password)
     user.set_password(password)
     user.save()
 
@@ -49,3 +49,10 @@ def bank(enable_db_access_for_all_tests):
     from currency.models import Bank
 
     yield Bank.objects.last()
+
+
+@pytest.fixture(scope='function')
+def rate(enable_db_access_for_all_tests):
+    from currency.models import Rate
+
+    yield Rate.objects.last()
