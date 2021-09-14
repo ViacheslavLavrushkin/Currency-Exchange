@@ -12,3 +12,4 @@ from settings.settings import *  # noqa
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEBUG = False
+CELERY_TASK_ALWAYS_EAGER = True

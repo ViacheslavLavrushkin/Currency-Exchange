@@ -1,5 +1,5 @@
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-CELERY_TASK_ALWAYS_EAGER = True
+# CELERY_TASK_ALWAYS_EAGER = True
 DEFAULT_FROM_EMAIL = 'testofamilo25@gmail.com'
 
 # AWS_S3_REGION_NAME = 'fra1'

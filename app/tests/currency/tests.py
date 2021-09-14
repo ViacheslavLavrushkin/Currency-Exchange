@@ -68,3 +68,23 @@ def test_create_rate_success(client):
     assert response.status_code == 302
     assert response.url == '/currency/rate/list/'
     assert Rate.objects.count() == rates_initial_count + 1
+
+
+def test_create_contact_us(client, mailoutbox, settings, fake):
+    email_from = fake.email()
+    form_data = {
+        'object': 'object_test',
+        'email_from': email_from,
+        'subject': 'subject_test',
+        'message': 'message_test',
+    }
+    response = client.post('/currency/contactus/create/', data=form_data)
+    assert response.status_code == 302
+    assert response.url == '/'
+    assert len([mailoutbox]) == 1
+    mail = mailoutbox[0]
+    # assert mail.to == [settings.DEFAULT_FROM_EMAIL]
+    assert mail.cc == []
+    assert mail.bcc == []
+    assert mail.reply_to == []
+    # assert mail.from_email == settings.EMAIL_HOST_USER
