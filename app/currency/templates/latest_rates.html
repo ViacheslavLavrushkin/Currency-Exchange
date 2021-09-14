@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load cache %}
+
+{% block main_content %}
+
+    {% cache 500 latest_rates %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Type</th>
+                <th scope="col">Buy</th>
+                <th scope="col">Sale</th>
+                <th scope="col">Source</th>
+                <th scope="col">Created</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rate in object_list %}
+             <tr>
+                 <th scope="row">{{ forloop.counter }}</th>
+                 <td>{{ rate.id }}</td>
+                 <td>{{ rate.get_type_display | upper }}</td>
+                 <td>{{ rate.buy }}</td>
+                 <td>{{ rate.sale }}</td>
+                 <td>{{ rate.bank.name }}</td>
+                 <td>{{ rate.created }}</td>
+             </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endcache %}
+{% endblock main_content %}
