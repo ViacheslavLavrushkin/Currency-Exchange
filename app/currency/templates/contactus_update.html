@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block main_content %}
+    Instance: {{ form.instance.id }}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <button type="submit">Send</button>
+    </form>
+
+    <button onclick="location.href='{% url 'currency:contactus-delete' pk=form.instance.id %}';">Delete</button>
+
+{% endblock main_content %}

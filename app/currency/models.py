@@ -26,6 +26,7 @@ class Bank(models.Model):
     url = models.URLField(max_length=200)
     original_url = models.URLField()
 
+    @property
     def get_bank_logo_url(self):
         if self.bank_logo:
             return self.bank_logo.url
@@ -38,6 +39,7 @@ class Rate(models.Model):
     sale = models.DecimalField(max_digits=5, decimal_places=2)
     buy = models.DecimalField(max_digits=5, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)
+    # date_parsed = models.DateTimeField()
     # source = models.CharField(max_length=64)
     bank = models.ForeignKey(
         Bank,
