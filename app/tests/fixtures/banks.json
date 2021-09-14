@@ -1,0 +1,13 @@
+[
+  {
+    "model": "currency.bank",
+    "pk": 1,
+    "fields": {
+      "bank_logo": "",
+      "name": "test Name",
+      "code_name": "code name",
+      "url": "",
+      "original_url": ""
+    }
+  }
+]

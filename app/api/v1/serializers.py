@@ -33,7 +33,7 @@ class ContactUsSendMailSerializer(serializers.ModelSerializer):
 
     def create(self, validate_data):
 
-        instance = super(ContactUsSendMailSerializer, self).create(validate_data)
+        instance = super().create(validate_data)
         send_mail(
             'From Django API created instance {}'.format(instance.pk),
             f'''
