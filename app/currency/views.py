@@ -6,6 +6,7 @@ from currency.models import Bank
 from currency.models import ContactUs
 from currency.models import Rate
 from currency.tasks import send_email_in_background
+from currency.filters import RateFilter
 
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.cache import cache
@@ -13,6 +14,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 from django.shortcuts import render, get_object_or_404, reverse, redirect  # noqa
+from django_filters.views import FilterView
 # from django.utils.decorators import method_decorator
 
 
@@ -35,9 +37,11 @@ def source_privatbank(request):
     return render(request, 'source_privatbank.html', context=context)
 
 
-class RateListView(ListView):
+class RateListView(FilterView):
     template_name = 'rate_list.html'
     queryset = Rate.objects.all().select_related('bank')
+    paginate_by = 25
+    filterset_class = RateFilter
 
 
 class RateDetailView(UserPassesTestMixin, DetailView):
