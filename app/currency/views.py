@@ -1,4 +1,5 @@
 from currency import choices, consts
+from currency.filters import RateFilter
 from currency.forms import ContactUsForm
 from currency.forms import RateForm
 from currency.forms import SourceForm
@@ -6,7 +7,6 @@ from currency.models import Bank
 from currency.models import ContactUs
 from currency.models import Rate
 from currency.tasks import send_email_in_background
-from currency.filters import RateFilter
 
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.cache import cache
@@ -14,8 +14,8 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 from django.shortcuts import render, get_object_or_404, reverse, redirect  # noqa
+
 from django_filters.views import FilterView
-# from django.utils.decorators import method_decorator
 
 
 def hello_world(request):

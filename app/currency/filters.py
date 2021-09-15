@@ -1,10 +1,9 @@
-import django_filters
-from django.forms import DateInput
-from django_filters.widgets import RangeWidget
-
 from currency.models import ContactUs, Rate
 
-from django_filters import rest_framework as filters, DateFromToRangeFilter
+from django.forms import DateInput
+
+import django_filters
+from django_filters import rest_framework as filters
 
 
 class RateFilter(filters.FilterSet):

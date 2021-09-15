@@ -4,9 +4,15 @@ register = Library()
 
 
 @register.inclusion_tag('dummy.html', takes_context=True)
-def pagination(context, page, begin_pages=1, end_pages=1,
-                      before_pages=2, after_pages=2,
-                      template='includes/pagination.html'):
+def pagination(
+        context,
+        page,
+        begin_pages=1,
+        end_pages=1,
+        before_pages=2,
+        after_pages=2,
+        template='includes/pagination.html'
+):
     """
     Return a Digg-like pagination,
     by splitting long list of page into 3 blocks of pages.
