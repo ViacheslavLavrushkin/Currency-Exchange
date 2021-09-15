@@ -1,3 +1,4 @@
+from currency import choices, consts
 from currency.forms import ContactUsForm
 from currency.forms import RateForm
 from currency.forms import SourceForm
@@ -7,10 +8,12 @@ from currency.models import Rate
 from currency.tasks import send_email_in_background
 
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.core.cache import cache
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 from django.shortcuts import render, get_object_or_404, reverse, redirect  # noqa
+# from django.utils.decorators import method_decorator
 
 
 def hello_world(request):
@@ -69,6 +72,32 @@ class RateDeleteView(UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.is_superuser
+
+
+def get_latest_rates():
+    if consts.CACHE_KEY_LATEST_RATES in cache:
+        return cache.get(consts.CACHE_KEY_LATEST_RATES)
+
+    object_list = []
+    for bank in Bank.objects.all():
+        for ct_value, ct_display in choices.RATE_TYPE_CHOICES:
+            latest_rate = Rate.objects\
+                .filter(type=ct_value, bank=bank). order_by('-created').first()
+            if latest_rate is not None:
+                object_list.append(latest_rate)
+
+    cache.set(consts.CACHE_KEY_LATEST_RATES, object_list, 60 * 60 * 8)
+    return object_list
+
+
+# @method_decorator(cache_page(60 * 60 * 8), name='dispatch')
+class LatestRates(TemplateView):
+    template_name = 'latest_rates.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(). get_context_data(**kwargs)
+        context['object_list'] = get_latest_rates()
+        return context
 
 
 class SourceListView(ListView):

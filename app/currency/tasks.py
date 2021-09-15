@@ -5,6 +5,7 @@ from celery import shared_task
 from currency import choices, consts
 from currency.utils import to_decimal
 
+from django.core.cache import cache
 from django.core.mail import send_mail
 
 import requests
@@ -56,6 +57,7 @@ def parse_privatbank():
         'EUR': choices.RATE_TYPE_EUR,
     }
 
+    clear_cache = False
     # source = 'privatbank'
 
     for curr in currencies:
@@ -84,8 +86,13 @@ def parse_privatbank():
                     # source=source,
                     bank=bank,
                 )
+                clear_cache = True
+                # cache.delete(consts.CACHE_KEY_LATEST_RATES)
             else:
                 print(f'Rate already exists: {sale} {buy}')  # noqa
+
+    if clear_cache:
+        cache.delete(consts.CACHE_KEY_LATEST_RATES)
 
 
 @shared_task

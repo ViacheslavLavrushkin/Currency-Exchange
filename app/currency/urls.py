@@ -1,5 +1,5 @@
 from currency.views import (
-    ContactUsCreate, ContactUsDeleteView, ContactUsDetailView, ContactUsListView, ContactUsUpdateView,
+    ContactUsCreate, ContactUsDeleteView, ContactUsDetailView, ContactUsListView, ContactUsUpdateView, LatestRates,
     RateCreateView, RateDeleteView, RateDetailView, RateListView, RateUpdateView,
     SourceCreateView, SourceDeleteView, SourceListView, SourceUpdateView, source_privatbank
     # RateListApi,
@@ -11,6 +11,7 @@ app_name = 'currency'
 
 urlpatterns = [
 
+    path('rate/latest/', LatestRates.as_view(), name='rate-latest'),
     path('rate/list/', RateListView.as_view(), name='rate-list'),
     path('rate/details/<int:pk>/', RateDetailView.as_view(), name='rate-details'),
     path('rate/create/', RateCreateView.as_view(), name='rate-create'),

@@ -39,7 +39,7 @@ class Rate(models.Model):
     sale = models.DecimalField(max_digits=5, decimal_places=2)
     buy = models.DecimalField(max_digits=5, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)
-    # date_parsed = models.DateTimeField()
+    date_parsed = models.DateTimeField(auto_now=True)
     # source = models.CharField(max_length=64)
     bank = models.ForeignKey(
         Bank,
@@ -50,7 +50,7 @@ class Rate(models.Model):
     # bank = models.ForeignKey(Source)
 
     def __str__(self):
-        return f'Rate id: {self.id}'
+        return f'Rate id: {self.id} {self.bank_id}'
 
 
 class ContactUs(models.Model):

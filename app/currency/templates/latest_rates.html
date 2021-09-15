@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
-{% block main_content %}
-<button onclick="location.href='{% url 'currency:rate-create' %}';">Create Rate</button>
+{% load cache %}
 
+{% block main_content %}
+
+    {% cache 500 latest_rates %}
     <table class="table table-striped">
         <thead>
             <tr>
@@ -11,11 +13,8 @@
                 <th scope="col">Type</th>
                 <th scope="col">Buy</th>
                 <th scope="col">Sale</th>
-                <th scope="col">Date Parsed</th>
                 <th scope="col">Source</th>
                 <th scope="col">Created</th>
-                <th scope="col">Details</th>
-                <th scope="col">Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -26,17 +25,11 @@
                  <td>{{ rate.get_type_display | upper }}</td>
                  <td>{{ rate.buy }}</td>
                  <td>{{ rate.sale }}</td>
-                 <td>{{ rate.date_parsed }}</td>
                  <td>{{ rate.bank.name }}</td>
                  <td>{{ rate.created }}</td>
-                 {% if request.user.is_authenticated %}
-                 <td><a href="{% url 'currency:rate-details' pk=rate.id %}">Details</a></td>
-                 {% endif %}
-                 {% if request.user.is_superuser %}
-                 <td>{{ rate.id }}</td>
-                 {% endif %}
              </tr>
         {% endfor %}
         </tbody>
     </table>
+    {% endcache %}
 {% endblock main_content %}
