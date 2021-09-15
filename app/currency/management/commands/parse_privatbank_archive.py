@@ -46,16 +46,15 @@ class Command(BaseCommand):
             'EUR': choices.RATE_TYPE_EUR,
         }
 
+        bank = Bank.objects.get(code_name=consts.CODE_NAME_PRIVATBANK)
+
         while True:
-            date_parse = f'json&date={get_date_str_start(date_start)}'
-            url = 'https://api.privatbank.ua/p24api/exchange_rates'
-            response = requests.get(url, params=date_parse)
+            date_parse = {'json&date': f'{get_date_str_start(date_start)}'}
+            response = requests.get('https://api.privatbank.ua/p24api/exchange_rates', params=date_parse)
             response.raise_for_status()
 
             currency_list = response.json()['exchangeRate']
             currency_date = response.json()['date']
-
-            bank = Bank.objects.get(code_name=consts.CODE_NAME_PRIVATBANK)
 
             for curr in currency_list:
                 if 'currency' in curr:
