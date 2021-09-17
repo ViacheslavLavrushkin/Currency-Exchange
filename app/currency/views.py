@@ -1,4 +1,5 @@
 from currency import choices, consts
+from currency.filters import RateFilter
 from currency.forms import ContactUsForm
 from currency.forms import RateForm
 from currency.forms import SourceForm
@@ -13,7 +14,8 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 from django.shortcuts import render, get_object_or_404, reverse, redirect  # noqa
-# from django.utils.decorators import method_decorator
+
+from django_filters.views import FilterView
 
 
 def hello_world(request):
@@ -35,9 +37,11 @@ def source_privatbank(request):
     return render(request, 'source_privatbank.html', context=context)
 
 
-class RateListView(ListView):
+class RateListView(FilterView):
     template_name = 'rate_list.html'
     queryset = Rate.objects.all().select_related('bank')
+    paginate_by = 25
+    filterset_class = RateFilter
 
 
 class RateDetailView(UserPassesTestMixin, DetailView):

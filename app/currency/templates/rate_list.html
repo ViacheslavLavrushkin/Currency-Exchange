@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 
+{% load pagination %}
+
 {% block main_content %}
 <button onclick="location.href='{% url 'currency:rate-create' %}';">Create Rate</button>
+
+    <form method="get">
+        {{ filter.form.as_p }}
+        <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-search"></span> Apply Filters
+        </button>
+    </form>
 
     <table class="table table-striped">
         <thead>
@@ -39,4 +48,9 @@
         {% endfor %}
         </tbody>
     </table>
+
+    {% if is_paginated %}
+         {% pagination page_obj %}
+     {% endif %}
+
 {% endblock main_content %}
