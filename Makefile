@@ -32,3 +32,9 @@ pytest:
 show-coverage:  ## open coverage HTML report in default browser
 	python3 -c "import webbrowser; webbrowser.open('.pytest_cache/coverage/index.html')"
 
+gunicorn:
+	cd app && gunicorn -w 4 settings.wsgi:application -b 0.0.0.0:8000 --log-level=DEBUG
+
+gunicorn1:
+	cd app && gunicorn -w 4 settings.wsgi:application -b 0.0.0.0:8001 --log-level=DEBUG
+
