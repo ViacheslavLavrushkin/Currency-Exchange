@@ -38,3 +38,7 @@ gunicorn:
 gunicorn1:
 	cd app && gunicorn -w 4 settings.wsgi:application -b 0.0.0.0:8001 --log-level=DEBUG
 
+uwsgi:
+	cd app && uwsgi --http :8000 --module settings.wsgi --master --processes 4
+
+

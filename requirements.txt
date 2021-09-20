@@ -98,6 +98,7 @@ toml==0.10.2
 traitlets==5.0.5
 uritemplate==3.0.1
 urllib3==1.26.6
+uWSGI==2.0.19.1
 vine==5.0.0
 wcwidth==0.2.5
 webencodings==0.5.1
