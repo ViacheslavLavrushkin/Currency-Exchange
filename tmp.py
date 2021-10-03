@@ -93,3 +93,31 @@
 #     <a href="{% url 'login' %}">Login</a>
 #     <a href="#">SignUp</a>
 # {% endif %}
+
+
+
+# sudo apt install uwsgi-core                   # version 2.0.18-11ubuntu1, or
+# sudo apt install uwsgi-plugin-alarm-curl      # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-alarm-xmpp      # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-curl-cron       # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-emperor-pg      # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-gccgo           # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-geoip           # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-glusterfs       # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-graylog2        # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-jvm-openjdk-11  # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-ldap            # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-lua5.1          # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-lua5.2          # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-luajit          # version 2.0.17.1+2+0.0.3build1
+# sudo apt install uwsgi-plugin-mono            # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-php             # version 2.0.18+5ubuntu7+0.0.4ubuntu1
+# sudo apt install uwsgi-plugin-psgi            # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-python3         # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-rack-ruby2.7    # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-rados           # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-router-access   # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-sqlite3         # version 2.0.18-11ubuntu1
+# sudo apt install uwsgi-plugin-xslt            # version 2.0.18-11ubuntu1
+
+# uWSGI==2.0.19.1

@@ -143,9 +143,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / '..' / 'static_content' / 'static'    #  /home/viacheslav/Python/currency/static_content/static # noqa
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / '..' / 'static_content'
+MEDIA_ROOT = BASE_DIR / '..' / 'static_content' / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -161,10 +162,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     print('No local settings were found! \n' )
 
 INTERNAL_IPS = [
-    '127.0.0.1',
+    '0.0.0.0',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CELERY_BROKER_URL = 'amqp://localhost'
 

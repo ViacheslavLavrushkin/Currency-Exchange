@@ -79,6 +79,8 @@ class RateDeleteView(UserPassesTestMixin, DeleteView):
 
 
 def get_latest_rates():
+    # from time import sleep
+    # sleep(5)
     if consts.CACHE_KEY_LATEST_RATES in cache:
         return cache.get(consts.CACHE_KEY_LATEST_RATES)
 
