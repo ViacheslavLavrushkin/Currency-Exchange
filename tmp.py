@@ -121,3 +121,17 @@
 # sudo apt install uwsgi-plugin-xslt            # version 2.0.18-11ubuntu1
 
 # uWSGI==2.0.19.1
+
+
+# DATABASES = {
+#
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'database-name',
+#         'USER': 'example-user',
+#         'PASSWORD': '1155771',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+#
+# }

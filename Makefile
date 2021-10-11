@@ -2,6 +2,9 @@ SHELL := /bin/bash
 
 manage_py := python ./app/manage.py
 
+build:
+	docker-compose down && docker-compose up -d
+
 runserver:
 	$(manage_py) runserver 0:8000
 
@@ -40,5 +43,8 @@ gunicorn1:
 
 uwsgi:
 	cd app && uwsgi --http :8000 --module settings.wsgi --master --processes 4
+
+services:
+	docker run -d -p 11211:11211 memcached && docker run -d -p 5672:5672 rabbitmq:3.8
 
 
