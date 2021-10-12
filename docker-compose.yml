@@ -51,3 +51,21 @@ services:
       - "8080:8080"  # windows specific!!!
       #- "80:80"
       #- "443:443"
+
+  flower:
+    image: mher/flower
+    container_name: flower
+    #    command: celery --broker=amqp://guest:guest@rabbitmq:5672// flower
+    command: celery --broker=amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@${RABBITMQ_DEFAULT_HOST}:${RABBITMQ_DEFAULT_PORT}// flower
+    depends_on:
+      - rabbitmq
+
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    ports:
+      - "9000:9000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./portainer:/data"
+    restart: always # unless-stopped
