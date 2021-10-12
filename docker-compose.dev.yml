@@ -24,5 +24,24 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    #    environment:
+    #      - PGADMIN_DEFAULT_EMAIL=currency@gmail.com
+    #      - PGADMIN_DEFAULT_PASSWORD=CURRENCY_DEFAULT_PASSWORD
+    #      - PGADMIN_LISTEN_PORT=5050
+    tty: true
+    stdin_open: true
+    restart: always
+    ports:
+      - "${PGADMIN_LISTEN_PORT:-5050}:${PGADMIN_LISTEN_PORT:-5050}"
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    env_file:
+      - .env
+
 volumes:
   db_data: {}
