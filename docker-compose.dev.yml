@@ -1,0 +1,51 @@
+version: "3.3"
+
+services:
+  backend:
+    command: python app/manage.py runserver 0:8000
+    volumes:
+      - "./:/home/build"
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+
+  rabbitmq:
+    ports:
+      - "15672:15672"
+
+  postgres:
+    image: postgres:13.4-alpine
+    restart: always
+    container_name: "postgres"
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  flower:
+    ports:
+      - "5555:5555"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    #    environment:
+    #      - PGADMIN_DEFAULT_EMAIL=currency@gmail.com
+    #      - PGADMIN_DEFAULT_PASSWORD=CURRENCY_DEFAULT_PASSWORD
+    #      - PGADMIN_LISTEN_PORT=5050
+    tty: true
+    stdin_open: true
+    restart: always
+    ports:
+      - "${PGADMIN_LISTEN_PORT:-5050}:${PGADMIN_LISTEN_PORT:-5050}"
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    env_file:
+      - .env
+
+volumes:
+  db_data: {}

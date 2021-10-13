@@ -132,3 +132,5 @@ dmypy.json
 
 app/settings/settings_local.dev.py
 app/settings/settings_local.py
+
+uwsgi-2.0.19.1/
